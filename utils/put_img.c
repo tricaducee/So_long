@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:10:42 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 10:49:05 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:51:50 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	put_img(t_all *all, char c, int x, int y)
 		img = mlx_xpm_file_to_image(all->mlx, "./assets/player.xpm", i, i + 1);
 	else if (c == 'E')
 		img = mlx_xpm_file_to_image(all->mlx, "./assets/exit.xpm", i, i + 1);
+	else if (c == 'X')
+		img = mlx_xpm_file_to_image(all->mlx, "./assets/enemy.xpm", i, i + 1);
 	else
 		return (1);
 	if (!img)

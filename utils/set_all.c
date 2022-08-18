@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:46 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 08:51:47 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/18 23:23:39 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,66 @@ unsigned int	ft_strslen(char **ss)
 	return (i);
 }
 
+void	set_enemy(t_all *all)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
+
+	i = 0;
+	k = 0;
+	while (all->map[i])
+	{
+		j = 0;
+		while (all->map[i][j])
+		{
+			if (all->map[i][j++] == 'X')
+			{
+				all->enemy[k].y = i;
+				all->enemy[k].x = j - 1;
+				k++;
+			}
+		}
+		i++;
+	}
+	all->enemy[k].y = 0;
+	all->enemy[k].x = 0;
+}
+
+void	enemy_check(t_all *all)
+{
+	unsigned int	enemy;
+	unsigned int	i;
+	unsigned int	j;
+
+	enemy = 0;
+	i = 0;
+	while (all->map[i])
+	{
+		j = 0;
+		while (all->map[i][j])
+			if (all->map[i][j++] == 'X')
+				enemy++;
+		i++;
+	}
+	all->enemy = malloc((i + 1) * sizeof(t_coor *));
+	if (!all->enemy)
+		exit_error(all, "Malloc error\n", 1);
+	set_enemy(all);
+}
+
 int	set_all(t_all *all)
 {
 	if (read_map(all))
 		return (1);
+	all->enemy = NULL;
 	all->total_coin = 0;
 	check_map(all);
+	enemy_check(all);
 	all->coin = 0;
 	all->exit = 0;
 	all->move = 0;
+	all->frame = 0;
 	if (player_position(all))
 		return (1);
 	all->mlx = mlx_init();

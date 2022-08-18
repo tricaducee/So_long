@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:20:13 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 06:40:35 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/18 22:40:07 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef struct S_all
 	unsigned int	exit;
 	unsigned int	life;
 	unsigned int	move;
+	unsigned int	frame;
 	int				fd;
+	t_coor			*enemy;
 	char			**map;
 	void			*mlx;
 	void			*window;

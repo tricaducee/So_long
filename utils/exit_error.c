@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 06:37:32 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 06:56:02 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/18 21:45:51 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	exit_error(t_all *all, char *str, int errnum)
 	//mlx_destroy_window(all->mlx, all->window);
 	//free(all->mlx);
 	//free(all->window);
+	if (all->enemy)
+		free(all->enemy);
 	while (all->map[i])
 		free(all->map[i++]);
 	free(all->map);

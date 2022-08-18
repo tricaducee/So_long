@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:09:59 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 08:54:58 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:49:23 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	up_move(t_all *all)
 		if (all->map[all->player.y - 1][all->player.x] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y - 1][all->player.x] == 'E')
+			close_win(all);
+		else if (all->map[all->player.y - 1][all->player.x] == 'X')
 			close_win(all);
 		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = '0';
@@ -42,6 +44,8 @@ void	down_move(t_all *all)
 			return ;
 		else if (all->map[all->player.y + 1][all->player.x] == 'E')
 			close_win(all);
+		else if (all->map[all->player.y + 1][all->player.x] == 'X')
+			close_win(all);
 		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.y++;
@@ -64,6 +68,8 @@ void	left_move(t_all *all)
 			return ;
 		else if (all->map[all->player.y][all->player.x - 1] == 'E')
 			close_win(all);
+		else if (all->map[all->player.y][all->player.x - 1] == 'X')
+			close_win(all);
 		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.x--;
@@ -84,6 +90,8 @@ void	right_move(t_all *all)
 		if (all->map[all->player.y][all->player.x + 1] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y][all->player.x + 1] == 'E')
+			close_win(all);
+		else if (all->map[all->player.y][all->player.x + 1] == 'X')
 			close_win(all);
 		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = '0';
