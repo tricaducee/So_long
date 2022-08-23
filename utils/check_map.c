@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:56:11 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:03:29 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/24 00:08:28 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ int	format_check(t_all *all)
 	if (i < 4)
 		return (1);
 	return (0);
+}
+
+void	exit_strchr(t_all *all, char c, char *str)
+{
+	while (*str)
+	{
+		if (c == *str)
+			break ;
+		str++;
+	}
+	if (!*str)
+		exit_error(all, "Error\nCaractere(s) invalide dans la map\n", 1);
 }
 
 void	cmpt_items_map(t_all *all)
@@ -88,6 +100,17 @@ void	border_check(t_all *all)
 
 void	check_map(t_all *all)
 {
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	while (all->map[i])
+	{
+		j = 0;
+		while (all->map[i][j] && all->map[i][j] != '\n')
+			exit_strchr(all, all->map[i][j++], "10PECX");
+		i++;
+	}
 	if (format_check(all))
 		exit_error(all, "Error\nMauvais format\n", 1);
 	cmpt_items_map(all);
