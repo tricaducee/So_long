@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:46 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/18 23:23:39 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:53:14 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	set_all(t_all *all)
 {
 	if (read_map(all))
 		return (1);
+	all->map_size.x = ft_strlen(all->map[0]) - 1;
+	all->map_size.y = ft_strslen(all->map);
 	all->enemy = NULL;
 	all->total_coin = 0;
 	check_map(all);
@@ -88,8 +90,6 @@ int	set_all(t_all *all)
 	all->mlx = mlx_init();
 	if (!all->mlx)
 		return (1);
-	all->map_size.x = ft_strlen(all->map[0]) - 1;
-	all->map_size.y = ft_strslen(all->map);
 	all->window = mlx_new_window(all->mlx, all->map_size.x * 64, all->map_size.y * 64 + 40, "so_long");
 	if (!all->window)
 		return (1);

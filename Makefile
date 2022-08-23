@@ -24,6 +24,7 @@ endif
 
 $(NAME) : $(OBJ)
 	@make -C printfd
+	@make -C mlx
 	$(ECHO) "$(YELLOW)Compilation de so_long...$(RESETTXT)"
 	@$(CC) $(CFLAGS) $^ -Lmlx -lmlx -framework OpenGL -framework AppKit -o $@ mlx/libmlx.a printfd/libftprintfd.a
 	$(ECHO) "$(GREEN)$(BOLD)Compilation Terminée !!!$(RESETTXT)"

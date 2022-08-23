@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:20:13 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/18 22:40:07 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/19 17:23:53 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct S_all
 	unsigned int	life;
 	unsigned int	move;
 	unsigned int	frame;
+	unsigned int	aleatory;
 	int				fd;
 	t_coor			*enemy;
 	char			**map;
@@ -49,6 +50,7 @@ int		player_position(t_all *all);
 int		key_event(int keycode, t_all *all);
 int		close_win(t_all *all);
 void	check_map(t_all *all);
+char	*itostr_base(unsigned int n, char *str, unsigned int base);
 void	exit_error(t_all *all, char *str, int errnum);
 
 #endif

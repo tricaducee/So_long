@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:23:14 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 08:53:07 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/19 20:51:19 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	map_gen(t_all *all)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
 	while (all->map[i])
@@ -29,5 +30,8 @@ int	map_gen(t_all *all)
 		}
 		i++;
 	}
+	str = itostr_base(all->move, "0123456789", 10);
+	mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
+	free(str);
 	return (0);
 }

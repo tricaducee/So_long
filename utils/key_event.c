@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:09:59 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/18 18:49:23 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/19 17:45:22 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	up_move(t_all *all)
 {
+	char	*str;
+
 	if (all->player.y && all->map[all->player.y - 1][all->player.x] != '1')
 	{
 		if (all->map[all->player.y - 1][all->player.x] == 'E' && !all->exit)
@@ -31,12 +33,20 @@ void	up_move(t_all *all)
 		all->map[all->player.y][all->player.x] = 'P';
 		if (all->coin == all->total_coin)
 			all->exit = 1;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
+		free(str);
 		all->move++;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
+		free(str);
 	}
 }
 
 void	down_move(t_all *all)
 {
+	char	*str;
+
 	if (all->player.y < all->map_size.y
 		&& all->map[all->player.y + 1][all->player.x] != '1')
 	{
@@ -55,12 +65,20 @@ void	down_move(t_all *all)
 		all->map[all->player.y][all->player.x] = 'P';
 		if (all->coin == all->total_coin)
 			all->exit = 1;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
+		free(str);
 		all->move++;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
+		free(str);
 	}
 }
 
 void	left_move(t_all *all)
 {
+	char	*str;
+
 	if (all->player.x < all->map_size.x
 		&& all->map[all->player.y][all->player.x - 1] != '1')
 	{
@@ -79,12 +97,20 @@ void	left_move(t_all *all)
 		all->map[all->player.y][all->player.x] = 'P';
 		if (all->coin == all->total_coin)
 			all->exit = 1;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
+		free(str);
 		all->move++;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
+		free(str);
 	}
 }
 
 void	right_move(t_all *all)
 {
+	char	*str;
+
 	if (all->player.x && all->map[all->player.y][all->player.x + 1] != '1')
 	{
 		if (all->map[all->player.y][all->player.x + 1] == 'E' && !all->exit)
@@ -102,7 +128,13 @@ void	right_move(t_all *all)
 		all->map[all->player.y][all->player.x] = 'P';
 		if (all->coin == all->total_coin)
 			all->exit = 1;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
+		free(str);
 		all->move++;
+		str = itostr_base(all->move, "0123456789", 10);
+		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
+		free(str);
 	}
 }
 

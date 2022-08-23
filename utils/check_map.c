@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:56:11 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 07:11:31 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/21 19:44:17 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	format_check(t_all *all)
 	return (0);
 }
 
-void	check_map(t_all *all)
+void	cmpt_items_map(t_all *all)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -65,6 +65,31 @@ void	check_map(t_all *all)
 	}
 	if (all->exit != 1 || player != 1 || all->total_coin < 1)
 		exit_error(all, "Error\nIl ni a pas le bon nombres d'items\n", 1);
+}
+
+void	border_check(t_all *all)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (all->map[0][i] == '1' && all->map[all->map_size.y - 1][i] == '1')
+		i++;
+	if (all->map[0][i] != '\n' || (all->map[all->map_size.y - 1][i]
+			&& all->map[all->map_size.y - 1][i] != '\n'))
+		exit_error(all, "Error\nPas de limite de map\n", 1);
+	i = 1;
+	while (i < all->map_size.y - 1)
+	{
+		if (all->map[i][0] != '1' || all->map[i][all->map_size.x - 1] != '1')
+			exit_error(all, "Error\nPas de limite de map\n", 1);
+		i++;
+	}
+}
+
+void	check_map(t_all *all)
+{
 	if (format_check(all))
 		exit_error(all, "Error\nMauvais format\n", 1);
+	cmpt_items_map(all);
+	border_check(all);
 }
