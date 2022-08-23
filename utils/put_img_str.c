@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_gen.c                                          :+:      :+:    :+:   */
+/*   put_img_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 03:23:14 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 22:09:55 by hrolle           ###   ########.fr       */
+/*   Created: 2022/08/16 03:10:42 by hrolle            #+#    #+#             */
+/*   Updated: 2022/08/23 21:17:42 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 
-int	map_gen(t_all *all)
+int	put_img_str(t_all *all, char *str, int x, int y)
 {
-	int		i;
-	int		j;
-	char	*str;
+	void	*img;
+	int i[2];
 
-	i = 0;
-	while (all->map[i])
-	{
-		j = 0;
-		while (all->map[i][j] && all->map[i][j] != '\n')
-		{
-			if (put_img(all, all->map[i][j], j, i))
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	str = itostr_base(all->move, "0123456789", 10);
-	mlx_string_put(all->mlx, all->window, (all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
-	free(str);
+	img = mlx_xpm_file_to_image(all->mlx, str, i, i + 1);
+	if (!img)
+		return (1);
+	mlx_put_image_to_window(all->mlx, all->window, img, x, y);
+	mlx_destroy_image(all->mlx, img);
 	return (0);
 }

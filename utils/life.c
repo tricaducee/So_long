@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_gen.c                                          :+:      :+:    :+:   */
+/*   life.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 03:23:14 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 22:09:55 by hrolle           ###   ########.fr       */
+/*   Created: 2022/08/23 22:22:06 by hrolle            #+#    #+#             */
+/*   Updated: 2022/08/23 22:26:02 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 
-int	map_gen(t_all *all)
+void	life(t_all *all)
 {
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	while (all->map[i])
-	{
-		j = 0;
-		while (all->map[i][j] && all->map[i][j] != '\n')
-		{
-			if (put_img(all, all->map[i][j], j, i))
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	str = itostr_base(all->move, "0123456789", 10);
-	mlx_string_put(all->mlx, all->window, (all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
-	free(str);
-	return (0);
+	all->life--;
+	if (!all->life)
+		close_win(all);
+	put_img_str(all, "./assets/wall.xpm", all->life * 64, 0);
 }

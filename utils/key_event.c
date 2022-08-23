@@ -6,136 +6,143 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:09:59 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/19 17:45:22 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 22:33:14 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 
-void	up_move(t_all *all)
+void	print_move(t_all *all)
 {
 	char	*str;
 
-	if (all->player.y && all->map[all->player.y - 1][all->player.x] != '1')
+	put_img_str(all, "./assets/wall_moves.xpm", (all->map_size.x - 1) * 64, 0);
+	str = itostr_base(all->move, "0123456789", 10);
+	mlx_string_put(all->mlx, all->window, (all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
+	free(str);
+}
+
+void	exit_on(t_all *all)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (all->map[i])
+	{
+		j = 0;
+		while (all->map[i][j])
+		{
+			if (all->map[i][j] == 'E')
+			{
+				put_img_str(all, "./assets/exit_on.xpm", j * 64, i * 64);
+				all->exit = 1;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	up_move(t_all *all)
+{
+	if (all->player.y && all->map[all->player.y - 1][all->player.x] == 'X')
+		life(all);
+	else if (all->player.y && all->map[all->player.y - 1][all->player.x] != '1')
 	{
 		if (all->map[all->player.y - 1][all->player.x] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y - 1][all->player.x] == 'E')
 			close_win(all);
-		else if (all->map[all->player.y - 1][all->player.x] == 'X')
-			close_win(all);
-		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
+		put_img(all, '0', all->player.x, all->player.y);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.y--;
 		if (all->map[all->player.y][all->player.x] == 'C')
 			all->coin++;
-		put_img(all, 'P', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = 'P';
-		if (all->coin == all->total_coin)
-			all->exit = 1;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
-		free(str);
+		if (all->coin == all->total_coin && !all->exit)
+			exit_on(all);
 		all->move++;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
-		free(str);
+		print_move(all);
 	}
+	put_img_str(all, "./assets/player_up.xpm", all->player.x * 64, all->player.y * 64);
 }
 
 void	down_move(t_all *all)
 {
-	char	*str;
-
 	if (all->player.y < all->map_size.y
+		&& all->map[all->player.y + 1][all->player.x] == 'X')
+		life(all);
+	else if (all->player.y < all->map_size.y
 		&& all->map[all->player.y + 1][all->player.x] != '1')
 	{
 		if (all->map[all->player.y + 1][all->player.x] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y + 1][all->player.x] == 'E')
 			close_win(all);
-		else if (all->map[all->player.y + 1][all->player.x] == 'X')
-			close_win(all);
-		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
+		put_img(all, '0', all->player.x, all->player.y);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.y++;
 		if (all->map[all->player.y][all->player.x] == 'C')
 			all->coin++;
-		put_img(all, 'P', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = 'P';
-		if (all->coin == all->total_coin)
-			all->exit = 1;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
-		free(str);
+		if (all->coin == all->total_coin && !all->exit)
+			exit_on(all);
 		all->move++;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
-		free(str);
+		print_move(all);
 	}
+	put_img_str(all, "./assets/player.xpm", all->player.x * 64, all->player.y * 64);
 }
 
 void	left_move(t_all *all)
 {
-	char	*str;
-
 	if (all->player.x < all->map_size.x
+		&& all->map[all->player.y][all->player.x - 1] == 'X')
+		life(all);
+	else if (all->player.x < all->map_size.x
 		&& all->map[all->player.y][all->player.x - 1] != '1')
 	{
 		if (all->map[all->player.y][all->player.x - 1] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y][all->player.x - 1] == 'E')
 			close_win(all);
-		else if (all->map[all->player.y][all->player.x - 1] == 'X')
-			close_win(all);
-		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
+		put_img(all, '0', all->player.x, all->player.y);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.x--;
 		if (all->map[all->player.y][all->player.x] == 'C')
 			all->coin++;
-		put_img(all, 'P', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = 'P';
-		if (all->coin == all->total_coin)
-			all->exit = 1;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
-		free(str);
+		if (all->coin == all->total_coin && !all->exit)
+			exit_on(all);
 		all->move++;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
-		free(str);
+		print_move(all);
 	}
+	put_img_str(all, "./assets/player_left.xpm", all->player.x * 64, all->player.y * 64);
 }
 
 void	right_move(t_all *all)
 {
-	char	*str;
-
-	if (all->player.x && all->map[all->player.y][all->player.x + 1] != '1')
+	if (all->player.x && all->map[all->player.y][all->player.x + 1] == 'X')
+		life(all);
+	else if (all->player.x && all->map[all->player.y][all->player.x + 1] != '1')
 	{
 		if (all->map[all->player.y][all->player.x + 1] == 'E' && !all->exit)
 			return ;
 		else if (all->map[all->player.y][all->player.x + 1] == 'E')
 			close_win(all);
-		else if (all->map[all->player.y][all->player.x + 1] == 'X')
-			close_win(all);
-		put_img(all, '0', all->player.x * 64, all->player.y * 64 + 40);
+		put_img(all, '0', all->player.x, all->player.y);
 		all->map[all->player.y][all->player.x] = '0';
 		all->player.x++;
 		if (all->map[all->player.y][all->player.x] == 'C')
 			all->coin++;
-		put_img(all, 'P', all->player.x * 64, all->player.y * 64 + 40);
 		all->map[all->player.y][all->player.x] = 'P';
-		if (all->coin == all->total_coin)
-			all->exit = 1;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0x000000, str);
-		free(str);
+		if (all->coin == all->total_coin && !all->exit)
+			exit_on(all);
 		all->move++;
-		str = itostr_base(all->move, "0123456789", 10);
-		mlx_string_put(all->mlx, all->window, (all->map_size.x / 2) * 64, 30, 0xFFFFFF, str);
-		free(str);
+		print_move(all);
 	}
+	put_img_str(all, "./assets/player_right.xpm", all->player.x * 64, all->player.y * 64);
 }
 
 int	key_event(int keycode, t_all *all)
@@ -152,9 +159,9 @@ int	key_event(int keycode, t_all *all)
 	if (keycode == 53)
 		close_win(all);
 	printf("%d\n", keycode);
-	//printf("move : %d\n", all->move);
-	//printf("coin : %d\n", all->coin);
-	//printf("total coin : %d\n", all->total_coin);
-	//printf("exit : %d\n", all->exit);
+	printf("move : %d\n", all->move);
+	printf("coin : %d\n", all->coin);
+	printf("total coin : %d\n", all->total_coin);
+	printf("exit : %d\n", all->exit);
 	return (0);
 }

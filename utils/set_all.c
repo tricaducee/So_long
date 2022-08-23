@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:46 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/21 16:53:14 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 22:27:32 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	set_all(t_all *all)
 	check_map(all);
 	enemy_check(all);
 	all->coin = 0;
+	all->life = 3;
 	all->exit = 0;
 	all->move = 0;
 	all->frame = 0;
@@ -90,7 +91,7 @@ int	set_all(t_all *all)
 	all->mlx = mlx_init();
 	if (!all->mlx)
 		return (1);
-	all->window = mlx_new_window(all->mlx, all->map_size.x * 64, all->map_size.y * 64 + 40, "so_long");
+	all->window = mlx_new_window(all->mlx, all->map_size.x * 64, all->map_size.y * 64, "so_long");
 	if (!all->window)
 		return (1);
 	if (map_gen(all))

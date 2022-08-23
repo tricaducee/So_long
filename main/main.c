@@ -6,79 +6,75 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:50 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/21 18:20:13 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 22:40:21 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 #include "../printfd/HEADER/ft_printfd.h"
 
-// void	print_tabs(char **strs)
-// {
-// 	while (*strs)
-// 		ft_printfd(1, "%s", *(strs++));
-// }
+void	print_tabs(char **strs)
+{
+	while (*strs)
+		ft_printfd(1, "%s", *(strs++));
+}
 
 void	right_enemy(t_all *all, int i)
 {
 	if (all->enemy[i].x < all->map_size.x
-		&& (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0'
-		|| all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
+		&& all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0')
 	{
-		if (all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P')
-			close_win(all);
-		put_img(all, '0', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
 		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
 		all->enemy[i].x++;
-		put_img(all, 'X', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
 		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
 	}
+	put_img_str(all, "./assets/enemy_right.xpm", all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P')
+		life(all);
 }
 
 void	down_enemy(t_all *all, int i)
 {
 	if (all->enemy[i].y < all->map_size.y
-		&& (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0'
-		|| all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
+		&& all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0')
 	{
-		if (all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P')
-			close_win(all);
-		put_img(all, '0', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
 		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
 		all->enemy[i].y++;
-		put_img(all, 'X', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
 		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
 	}
+	put_img_str(all, "./assets/enemy.xpm", all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P')
+		life(all);
 }
 
 void	left_enemy(t_all *all, int i)
 {
-	if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0'
-		|| all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
+	if (all->enemy[i].x && all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0')
 	{
-		if (all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P')
-			close_win(all);
-		put_img(all, '0', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
 		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
 		all->enemy[i].x--;
-		put_img(all, 'X', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
 		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
 	}
+	put_img_str(all, "./assets/enemy_left.xpm", all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P')
+		life(all);
 }
 
 void	up_enemy(t_all *all, int i)
 {
-	if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0'
-		|| all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
+	if (all->enemy[i].y && all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0')
 	{
-		if (all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P')
-			close_win(all);
-		put_img(all, '0', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
 		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
 		all->enemy[i].y--;
-		put_img(all, 'X', all->enemy[i].x * 64, all->enemy[i].y * 64 + 40);
 		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
 	}
+	put_img_str(all, "./assets/enemy_up.xpm", all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P')
+		life(all);
 }
 
 int	animation(t_all *all)
@@ -89,7 +85,7 @@ int	animation(t_all *all)
 	i = 0;
 	if (all->aleatory++ == 4294967295)
 		all->aleatory = 0;
-	if (all->frame++ < 3000)
+	if (all->frame++ < 3800)
 		return (0);
 	while (all->enemy[i].x || all->enemy[i].y)
 	{
@@ -154,7 +150,7 @@ int	main(int ac, char **av)
 	}
 	if (set_all(&all))
 		return (1);
-	//print_tabs(all.map);
+	print_tabs(all.map);
 	mlx_key_hook(all.window, &key_event, &all);
 	mlx_hook(all.window, 17, 0, &close_win, &all);
 	mlx_loop_hook(all.mlx, &animation, &all);
