@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_position.c                                  :+:      :+:    :+:   */
+/*   exit_on.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 04:46:28 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:11:05 by hrolle           ###   ########.fr       */
+/*   Created: 2022/08/23 23:06:31 by hrolle            #+#    #+#             */
+/*   Updated: 2022/08/23 23:07:00 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 
-int	player_position(t_all *all)
+void	exit_on(t_all *all)
 {
-	unsigned int	x;
-	unsigned int	y;
+	int	i;
+	int	j;
 
-	y = 0;
-	while (all->map[y])
+	i = 0;
+	while (all->map[i])
 	{
-		x = 0;
-		while (all->map[y][x])
+		j = 0;
+		while (all->map[i][j])
 		{
-			if (all->map[y][x] == 'P')
+			if (all->map[i][j] == 'E')
 			{
-				all->player.x = x;
-				all->player.y = y;
-				return (0);
+				put_img_str(all, "./assets/exit_on.xpm", j * 64, i * 64);
+				all->exit = 1;
+				return ;
 			}
-			x++;
+			j++;
 		}
-		y++;
+		i++;
 	}
-	return (1);
 }

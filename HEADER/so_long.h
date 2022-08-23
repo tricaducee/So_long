@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:20:13 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 22:22:43 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 23:22:44 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct S_coor
 {
 	unsigned int	x;
-	unsigned int	y; 
+	unsigned int	y;
 }					t_coor;
 
 typedef struct S_all
@@ -49,7 +49,13 @@ int		put_img(t_all *all, char c, int x, int y);
 int		put_img_str(t_all *all, char *str, int x, int y);
 int		player_position(t_all *all);
 int		key_event(int keycode, t_all *all);
+void	right_enemy(t_all *all, int i);
+void	left_enemy(t_all *all, int i);
+void	up_enemy(t_all *all, int i);
+void	down_enemy(t_all *all, int i);
 void	life(t_all *all);
+void	exit_on(t_all *all);
+void	print_move(t_all *all);
 int		close_win(t_all *all);
 void	check_map(t_all *all);
 char	*itostr_base(unsigned int n, char *str, unsigned int base);

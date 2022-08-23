@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:46 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 22:27:32 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 23:14:28 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ unsigned int	ft_strslen(char **ss)
 {
 	unsigned int	i;
 
- 	i = 0;
+	i = 0;
 	while (ss[i])
 		i++;
 	return (i);
@@ -91,7 +91,8 @@ int	set_all(t_all *all)
 	all->mlx = mlx_init();
 	if (!all->mlx)
 		return (1);
-	all->window = mlx_new_window(all->mlx, all->map_size.x * 64, all->map_size.y * 64, "so_long");
+	all->window = mlx_new_window(all->mlx,
+			all->map_size.x * 64, all->map_size.y * 64, "so_long");
 	if (!all->window)
 		return (1);
 	if (map_gen(all))

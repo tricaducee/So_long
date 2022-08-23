@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:10:42 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 21:17:42 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 23:12:46 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	put_img_str(t_all *all, char *str, int x, int y)
 {
 	void	*img;
-	int i[2];
+	int		i[2];
 
 	img = mlx_xpm_file_to_image(all->mlx, str, i, i + 1);
 	if (!img)

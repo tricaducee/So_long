@@ -1,71 +1,77 @@
-// 		// modulo = (all->enemy[i].x + all->enemy[i].y) % 5;
-// 		// if (modulo == 0)
-// 		// 	enemy_move_a(all, i);
-// 		// else if (modulo == 1)
-// 		// 	enemy_move_b(all, i);
-// 		// else if (modulo == 2)
-// 		// 	enemy_move_c(all, i);
-// 		// else if (modulo == 3)
-// 		// 	enemy_move_d(all, i);
-// 		// else if (modulo == 4)
-// 		// 	enemy_move_e(all, i);
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy_move.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 23:18:03 by hrolle            #+#    #+#             */
+/*   Updated: 2022/08/23 23:18:56 by hrolle           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// void	enemy_move_a(t_all *all, unsigned int i)
-// {
-// 		if (all->enemy[i].x < all->map_size.x && (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
-// 			right_enemy(all, i);
-// 		else if (all->enemy[i].y < all->map_size.y && (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
-// 			down_enemy(all, i);		
-// 		else if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
-// 			up_enemy(all, i);
-// 		else if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
-// 			left_enemy(all, i);
-// }
+#include "../HEADER/so_long.h"
 
-// void	enemy_move_b(t_all *all, unsigned int i)
-// {
-// 		if (all->enemy[i].y < all->map_size.y && (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
-// 			down_enemy(all, i);		
-// 		else if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
-// 			up_enemy(all, i);
-// 		else if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
-// 			left_enemy(all, i);
-// 		else if (all->enemy[i].x < all->map_size.x && (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
-// 			right_enemy(all, i);
-// }
+void	right_enemy(t_all *all, int i)
+{
+	if (all->enemy[i].x < all->map_size.x
+		&& all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0')
+	{
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
+		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
+		all->enemy[i].x++;
+		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
+	}
+	put_img_str(all, "./assets/enemy_right.xpm",
+		all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P')
+		life(all);
+}
 
-// void	enemy_move_c(t_all *all, unsigned int i)
-// {	
-// 		if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
-// 			up_enemy(all, i);
-// 		else if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
-// 			left_enemy(all, i);
-// 		else if (all->enemy[i].x < all->map_size.x && (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
-// 			right_enemy(all, i);
-// 		else if (all->enemy[i].y < all->map_size.y && (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
-// 			down_enemy(all, i);	
-// }
+void	down_enemy(t_all *all, int i)
+{
+	if (all->enemy[i].y < all->map_size.y
+		&& all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0')
+	{
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
+		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
+		all->enemy[i].y++;
+		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
+	}
+	put_img_str(all, "./assets/enemy.xpm",
+		all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P')
+		life(all);
+}
 
-// void	enemy_move_d(t_all *all, unsigned int i)
-// {
-// 		if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
-// 			left_enemy(all, i);
-// 		else if (all->enemy[i].x < all->map_size.x && (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
-// 			right_enemy(all, i);
-// 		else if (all->enemy[i].y < all->map_size.y && (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
-// 			down_enemy(all, i);		
-// 		else if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
-// 			up_enemy(all, i);
-// }
+void	left_enemy(t_all *all, int i)
+{
+	if (all->enemy[i].x
+		&& all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0')
+	{
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
+		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
+		all->enemy[i].x--;
+		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
+	}
+	put_img_str(all, "./assets/enemy_left.xpm",
+		all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P')
+		life(all);
+}
 
-// void	enemy_move_e(t_all *all, unsigned int i)
-// {
-// 		if (all->enemy[i].x < all->map_size.x && (all->map[all->enemy[i].y][all->enemy[i].x + 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x + 1] == 'P'))
-// 			right_enemy(all, i);
-// 		else if (all->enemy[i].y < all->map_size.y && (all->map[all->enemy[i].y + 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y + 1][all->enemy[i].x] == 'P'))
-// 			down_enemy(all, i);
-// 		else if (all->enemy[i].x && (all->map[all->enemy[i].y][all->enemy[i].x - 1] == '0' || all->map[all->enemy[i].y][all->enemy[i].x - 1] == 'P'))
-// 			left_enemy(all, i);	
-// 		else if (all->enemy[i].y && (all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0' || all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P'))
-// 			up_enemy(all, i);
-// }
+void	up_enemy(t_all *all, int i)
+{
+	if (all->enemy[i].y
+		&& all->map[all->enemy[i].y - 1][all->enemy[i].x] == '0')
+	{
+		put_img(all, '0', all->enemy[i].x, all->enemy[i].y);
+		all->map[all->enemy[i].y][all->enemy[i].x] = '0';
+		all->enemy[i].y--;
+		all->map[all->enemy[i].y][all->enemy[i].x] = 'X';
+	}
+	put_img_str(all, "./assets/enemy_up.xpm",
+		all->enemy[i].x * 64, all->enemy[i].y * 64);
+	if (all->map[all->enemy[i].y - 1][all->enemy[i].x] == 'P')
+		life(all);
+}

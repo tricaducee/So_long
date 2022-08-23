@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:23:14 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 22:09:55 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/23 23:10:43 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	map_gen(t_all *all)
 		i++;
 	}
 	str = itostr_base(all->move, "0123456789", 10);
-	mlx_string_put(all->mlx, all->window, (all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
+	mlx_string_put(all->mlx, all->window,
+		(all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
 	free(str);
 	return (0);
 }

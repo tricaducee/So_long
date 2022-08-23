@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_position.c                                  :+:      :+:    :+:   */
+/*   print_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 04:46:28 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:11:05 by hrolle           ###   ########.fr       */
+/*   Created: 2022/08/23 23:08:20 by hrolle            #+#    #+#             */
+/*   Updated: 2022/08/23 23:11:23 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 
-int	player_position(t_all *all)
+void	print_move(t_all *all)
 {
-	unsigned int	x;
-	unsigned int	y;
+	char	*str;
 
-	y = 0;
-	while (all->map[y])
-	{
-		x = 0;
-		while (all->map[y][x])
-		{
-			if (all->map[y][x] == 'P')
-			{
-				all->player.x = x;
-				all->player.y = y;
-				return (0);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (1);
+	put_img_str(all, "./assets/wall_moves.xpm", (all->map_size.x - 1) * 64, 0);
+	str = itostr_base(all->move, "0123456789", 10);
+	mlx_string_put(all->mlx, all->window,
+		(all->map_size.x - 1) * 64 + 25, 36, 0xFFFFFF, str);
+	free(str);
 }
