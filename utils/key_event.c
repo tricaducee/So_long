@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 05:09:59 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:09:48 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 02:42:38 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	up_move(t_all *all)
 	else if (all->player.y && all->map[all->player.y - 1][all->player.x] != '1')
 	{
 		if (all->map[all->player.y - 1][all->player.x] == 'E' && !all->exit)
+		{
+			put_img_str(all, PLAYER_UP,
+				all->player.x * 64, all->player.y * 64);
 			return ;
+		}
 		else if (all->map[all->player.y - 1][all->player.x] == 'E')
 			close_win(all);
 		put_img(all, '0', all->player.x, all->player.y);
@@ -33,8 +37,7 @@ void	up_move(t_all *all)
 		all->move++;
 		print_move(all);
 	}
-	put_img_str(all, "./assets/player_up.xpm",
-		all->player.x * 64, all->player.y * 64);
+	put_img_str(all, PLAYER_UP, all->player.x * 64, all->player.y * 64);
 }
 
 void	down_move(t_all *all)
@@ -46,7 +49,10 @@ void	down_move(t_all *all)
 		&& all->map[all->player.y + 1][all->player.x] != '1')
 	{
 		if (all->map[all->player.y + 1][all->player.x] == 'E' && !all->exit)
+		{
+			put_img_str(all, PLAYER, all->player.x * 64, all->player.y * 64);
 			return ;
+		}
 		else if (all->map[all->player.y + 1][all->player.x] == 'E')
 			close_win(all);
 		put_img(all, '0', all->player.x, all->player.y);
@@ -60,8 +66,7 @@ void	down_move(t_all *all)
 		all->move++;
 		print_move(all);
 	}
-	put_img_str(all, "./assets/player.xpm",
-		all->player.x * 64, all->player.y * 64);
+	put_img_str(all, PLAYER, all->player.x * 64, all->player.y * 64);
 }
 
 void	left_move(t_all *all)
@@ -73,7 +78,10 @@ void	left_move(t_all *all)
 		&& all->map[all->player.y][all->player.x - 1] != '1')
 	{
 		if (all->map[all->player.y][all->player.x - 1] == 'E' && !all->exit)
+		{
+			put_img_str(all, PLAYER_L, all->player.x * 64, all->player.y * 64);
 			return ;
+		}
 		else if (all->map[all->player.y][all->player.x - 1] == 'E')
 			close_win(all);
 		put_img(all, '0', all->player.x, all->player.y);
@@ -87,8 +95,7 @@ void	left_move(t_all *all)
 		all->move++;
 		print_move(all);
 	}
-	put_img_str(all, "./assets/player_left.xpm",
-		all->player.x * 64, all->player.y * 64);
+	put_img_str(all, PLAYER_L, all->player.x * 64, all->player.y * 64);
 }
 
 void	right_move(t_all *all)
@@ -98,7 +105,11 @@ void	right_move(t_all *all)
 	else if (all->player.x && all->map[all->player.y][all->player.x + 1] != '1')
 	{
 		if (all->map[all->player.y][all->player.x + 1] == 'E' && !all->exit)
+		{
+			put_img_str(all, PLAYER_R,
+				all->player.x * 64, all->player.y * 64);
 			return ;
+		}
 		else if (all->map[all->player.y][all->player.x + 1] == 'E')
 			close_win(all);
 		put_img(all, '0', all->player.x, all->player.y);
@@ -112,8 +123,7 @@ void	right_move(t_all *all)
 		all->move++;
 		print_move(all);
 	}
-	put_img_str(all, "./assets/player_right.xpm",
-		all->player.x * 64, all->player.y * 64);
+	put_img_str(all, PLAYER_R, all->player.x * 64, all->player.y * 64);
 }
 
 int	key_event(int keycode, t_all *all)

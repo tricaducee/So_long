@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 03:20:13 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:22:44 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 02:40:45 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# define PLAYER "./assets/player.xpm"
+# define PLAYER_UP "./assets/player_up.xpm"
+# define PLAYER_R "./assets/player_right.xpm"
+# define PLAYER_L "./assets/player_left.xpm"
 
 typedef struct S_coor
 {

@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:44 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/16 01:45:54 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 01:10:28 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ int	read_map(t_all *all)
 	char	*line;
 	char	**tmp;
 
-	all->map = malloc(1 * sizeof(char *));
+	all->map = malloc(2 * sizeof(char *));
 	if (!all->map)
 		return (1);
-	all->map[0] = NULL;
+	all->map[0] = get_next_line(all->fd);
+	if (!all->map[0])
+		return (1);
+	all->map[1] = NULL;
 	while (1)
 	{
 		line = get_next_line(all->fd);
