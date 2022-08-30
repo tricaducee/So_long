@@ -50,6 +50,11 @@ fclean : clean
 	@$(RM) $(NAME)
 	$(ECHO) "$(GREEN)$(BOLD)Terminé !$(RESETTXT)"
 
+fclean_all : fclean
+	@make clean -C mlx
+
 re : fclean all
+
+re_all : fclean_all all
 
 .PHONY: all re bonus clean fclean

@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:46 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/23 23:14:28 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 03:59:00 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	enemy_check(t_all *all)
 				enemy++;
 		i++;
 	}
-	all->enemy = malloc((i + 1) * sizeof(t_coor *));
+	all->enemy = malloc((enemy + 1) * sizeof(t_coor *));
 	if (!all->enemy)
 		exit_error(all, "Malloc error\n", 1);
 	set_enemy(all);

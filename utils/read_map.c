@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:44 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/30 01:10:28 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 03:50:53 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	**ft_strsjoin(char **strs, char *line)
 	while (strs[i])
 		i++;
 	ret = malloc((i + 2) * sizeof(char *));
+	if (!ret)
+		return (NULL);
 	i = -1;
 	while (strs[++i])
 		ret[i] = strs[i];
@@ -50,6 +52,8 @@ int	read_map(t_all *all)
 		tmp = all->map;
 		all->map = ft_strsjoin(tmp, line);
 		free(tmp);
+		if (!all->map)
+			return (1);
 	}
 	return (0);
 }
