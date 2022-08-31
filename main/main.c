@@ -6,7 +6,7 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:50 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/30 04:15:59 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 17:49:40 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int ac, char **av)
 	all.fd = open(av[1], O_RDONLY);
 	if (all.fd == -1)
 	{
-		ft_printfd(2, "Error\nLe fichier ne c'est pas ouvert\n");
+		ft_printfd(2, "Error\nLe fichier ne s'est pas ouvert\n");
 		return (1);
 	}
 	if (set_all(&all))

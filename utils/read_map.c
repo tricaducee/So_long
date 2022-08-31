@@ -6,12 +6,13 @@
 /*   By: hrolle <hrolle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:58:44 by hrolle            #+#    #+#             */
-/*   Updated: 2022/08/30 03:50:53 by hrolle           ###   ########.fr       */
+/*   Updated: 2022/08/30 17:46:41 by hrolle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../HEADER/so_long.h"
 #include "../HEADER/get_next_line.h"
+#include "../printfd/HEADER/ft_printfd.h"
 
 char	**ft_strsjoin(char **strs, char *line)
 {
@@ -42,7 +43,10 @@ int	read_map(t_all *all)
 		return (1);
 	all->map[0] = get_next_line(all->fd);
 	if (!all->map[0])
+	{
+		ft_printfd(2, "Error\nMap vide\n");
 		return (1);
+	}
 	all->map[1] = NULL;
 	while (1)
 	{

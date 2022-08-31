@@ -10,7 +10,7 @@ BOLD = \033[1m
 RM = rm -rf
 
 SRC =	gnl/get_next_line.c			main/enemy_move.c	utils/check_map.c	utils/exit_error.c	utils/itostr_base.c	utils/life.c	utils/player_position.c	utils/put_img.c		utils/read_map.c	\
-		gnl/get_next_line_utils.c	main/main.c			utils/close_win.c	utils/exit_on.c		utils/key_event.c	utils/map_gen.c	utils/print_move.c		utils/put_img_str.c	utils/set_all.c		\
+		gnl/get_next_line_utils.c	main/main.c			utils/close_win.c	utils/exit_on.c		utils/key_event.c	utils/map_gen.c	utils/print_move.c		utils/put_img_str.c	utils/set_all.c
 
 OBJ = $(SRC:.c=.o)
 
